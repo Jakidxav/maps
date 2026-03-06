@@ -5,8 +5,8 @@ export default function CursorManager(map) {
   let mouseState = {
     onHandle: false,
     draggingHandle: false,
-    onRectangle: false,
-    draggingRectangle: false,
+    onRegion: false,
+    draggingRegion: false,
   }
 
   return function setCursor(newState) {
@@ -17,7 +17,7 @@ export default function CursorManager(map) {
 
     if (mouseState.onHandle || mouseState.draggingHandle)
       canvas.style.cursor = 'ew-resize'
-    else if (mouseState.onRectangle || mouseState.draggingRectangle)
+    else if (mouseState.onRegion || mouseState.draggingRegion)
       canvas.style.cursor = 'move'
     else canvas.style.cursor = originalStyle
   }

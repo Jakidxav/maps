@@ -1,6 +1,6 @@
 import { select } from 'd3-selection'
 import { FLOATING_HANDLE, SHOW_RADIUS_GUIDELINE } from '../constants'
-import { getPathMaker, project } from './utils'
+import { getPathMaker, project } from '../utils'
 import {
   area,
   convertArea,
@@ -12,7 +12,7 @@ import {
   circle as turfCircle,
   point,
 } from '@turf/turf'
-import CursorManager from './cursor-manager'
+import CursorManager from '../cursor-manager'
 
 const POLES = [point([0, -90]), point([0, 90])]
 const abbreviations = {
@@ -132,7 +132,7 @@ export default function CircleRenderer({
 
     const onMouseUp = () => {
       onIdle(circle)
-      setCursor({ draggingCircle: false })
+      setCursor({ draggingRegion: false })
       map.off('mousemove', onMouseMove)
       map.off('touchmove', onMouseMove)
       map.dragPan.enable()
@@ -160,7 +160,7 @@ export default function CircleRenderer({
         lng: lngLat.lng - center.lng,
         lat: lngLat.lat - center.lat,
       }
-      setCursor({ draggingCircle: true })
+      setCursor({ draggingRegion: true })
       svgCircle.style('pointer-events', 'none')
       svgHandle.style('pointer-events', 'none')
     }

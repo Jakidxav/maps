@@ -1,5 +1,5 @@
 import { select } from 'd3-selection'
-import { getPathMaker, project } from './utils'
+import { getPathMaker, project } from '../utils'
 import {
   area,
   bbox,
@@ -13,7 +13,7 @@ import {
   circle as turfCircle,
   point,
 } from '@turf/turf'
-import CursorManager from './cursor-manager'
+import CursorManager from '../cursor-manager'
 
 export const HANDLE_RADIUS = 8
 export const SHOW_RADIUS_GUIDELINE = true
@@ -128,7 +128,7 @@ export default function RectangleRenderer({
 
     const onMouseUp = () => {
       onIdle(rectangle)
-      setCursor({ draggingRectangle: false })
+      setCursor({ draggingRegion: false })
       map.off('mousemove', onMouseMove)
       map.off('touchmove', onMouseMove)
       map.dragPan.enable()
@@ -156,7 +156,7 @@ export default function RectangleRenderer({
         lng: lngLat.lng - center.lng,
         lat: lngLat.lat - center.lat,
       }
-      setCursor({ draggingRectangle: true })
+      setCursor({ draggingRegion: true })
       svgRectangle.style('pointer-events', 'none')
       svgHandle.style('pointer-events', 'none')
     }
