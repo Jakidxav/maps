@@ -42,7 +42,7 @@ const Index = () => {
         title={'@carbonplan/maps'}
       />
       <Box sx={{ position: 'absolute', top: 0, bottom: 0, width: '100%' }}>
-        <Map zoom={2} center={[0, 0]} debug={debug}>
+        <Map zoom={2} center={[-10, 10]} debug={debug}>
           <Fill
             color={theme.rawColors.background}
             source={bucket + 'basemaps/ocean'}
@@ -59,7 +59,10 @@ const Index = () => {
               backgroundColor={theme.colors.background}
               fontFamily={theme.fonts.mono}
               fontSize={'14px'}
+              minRadius={300}
               maxRadius={2000}
+              initialRadius={1000}
+              // mode={'rectangle'} // options: 'circle', 'rectangle', defaults to 'circle'
             />
           )}
           <Raster
