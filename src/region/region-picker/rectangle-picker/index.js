@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useMap } from '../../../map-provider'
 import RectangleRenderer from './rectangle-renderer'
 
-import { HANDLE_RADIUS } from './rectangle-renderer';
+import { HANDLE_RADIUS } from './rectangle-renderer'
 
 const RectanglePicker = ({
   id,
@@ -77,8 +77,13 @@ const RectanglePicker = ({
         fillOpacity={0.5}
       />
 
-      <circle id={`handle-${id}`} r={HANDLE_RADIUS} fill={color} cursor='ew-resize' />
-      
+      <circle
+        id={`handle-${id}`}
+        r={HANDLE_RADIUS}
+        fill={color}
+        cursor='ew-resize'
+      />
+
       <line
         id={`radius-guideline-${id}`}
         stroke={color}

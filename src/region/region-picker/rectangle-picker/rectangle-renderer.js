@@ -15,8 +15,7 @@ import {
 } from '@turf/turf'
 import CursorManager from './cursor-manager'
 
-
-export const HANDLE_RADIUS = 8;
+export const HANDLE_RADIUS = 8
 export const SHOW_RADIUS_GUIDELINE = true
 
 const POLES = [point([0, -90]), point([0, 90])]
@@ -212,7 +211,6 @@ export default function RectangleRenderer({
   }
 
   function geoRect(c, inverted = false) {
-
     let _bbox = bbox(c)
     let r = bboxPolygon(_bbox)
 
@@ -221,8 +219,8 @@ export default function RectangleRenderer({
       [_bbox[2], _bbox[3]], // upper‑right (east, north)
       [_bbox[2], _bbox[1]], // lower‑right (east, south)
       [_bbox[0], _bbox[1]], // lower‑left  (west, south)
-    ];
-    
+    ]
+
     // console.log('Corner coordinate pairs:', corners);
     r.properties.center = c?.properties?.center
     r.properties.corners = corners

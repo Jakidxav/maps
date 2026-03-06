@@ -1,32 +1,32 @@
-import React, { useState, useRef, useCallback, useEffect } from "react";
-import CirclePicker from "./circle-picker";
-import RectanglePicker from "./rectangle-picker"
-import { UPDATE_STATS_ON_DRAG } from "./constants";
-import { distance } from "@turf/turf";
-import { v4 as uuidv4 } from "uuid";
+import React, { useState, useRef, useCallback, useEffect } from 'react'
+import CirclePicker from './circle-picker'
+import RectanglePicker from './rectangle-picker'
+import { UPDATE_STATS_ON_DRAG } from './constants'
+import { distance } from '@turf/turf'
+import { v4 as uuidv4 } from 'uuid'
 
-import { useRegionContext } from "../context";
-import { useMap } from "../../map-provider";
+import { useRegionContext } from '../context'
+import { useMap } from '../../map-provider'
 
 function getInitialRadius(map, units, minRadius, maxRadius) {
-  const bounds = map.getBounds().toArray();
-  const dist = distance(bounds[0], bounds[1], { units });
-  let radius = Math.round(dist / 15);
-  radius = minRadius ? Math.max(minRadius, radius) : radius;
-  radius = maxRadius ? Math.min(maxRadius, radius) : radius;
+  const bounds = map.getBounds().toArray()
+  const dist = distance(bounds[0], bounds[1], { units })
+  let radius = Math.round(dist / 15)
+  radius = minRadius ? Math.max(minRadius, radius) : radius
+  radius = maxRadius ? Math.min(maxRadius, radius) : radius
 
-  return radius;
+  return radius
 }
 
 function isValidCoordinate(longitude, latitude) {
   return (
-    typeof longitude === "number" &&
-    typeof latitude === "number" &&
+    typeof longitude === 'number' &&
+    typeof latitude === 'number' &&
     !isNaN(longitude) &&
     !isNaN(latitude) &&
     latitude >= -90 &&
     latitude <= 90
-  );
+  )
 }
 
 function getInitialCenter(map, center) {
@@ -35,15 +35,15 @@ function getInitialCenter(map, center) {
     center.length === 2 &&
     isValidCoordinate(center[0], center[1])
   ) {
-    return { lng: center[0], lat: center[1] };
+    return { lng: center[0], lat: center[1] }
   } else {
     if (center) {
       console.warn(
         `Invalid initialCenter provided: ${center}. Should be [lng, lat]. Using map center instead.`
-      );
+      )
     }
-    const mapCenter = map.getCenter();
-    return { lng: mapCenter.lng, lat: mapCenter.lat };
+    const mapCenter = map.getCenter()
+    return { lng: mapCenter.lng, lat: mapCenter.lat }
   }
 }
 
@@ -53,44 +53,44 @@ function RegionPicker({
   color,
   fontFamily,
   fontSize,
-  units = "kilometers",
+  units = 'kilometers',
   initialRadius: initialRadiusProp,
   initialCenter: initialCenterProp,
   minRadius,
   maxRadius,
-  mode='circle'
+  mode = 'circle',
 }) {
-  const { map } = useMap();
-  const id = useRef(uuidv4());
+  const { map } = useMap()
+  const id = useRef(uuidv4())
 
-  const initialCenter = useRef(getInitialCenter(map, initialCenterProp));
+  const initialCenter = useRef(getInitialCenter(map, initialCenterProp))
 
   const initialRadius = useRef(
     initialRadiusProp || getInitialRadius(map, units, minRadius, maxRadius)
-  );
-  const { setRegion } = useRegionContext();
+  )
+  const { setRegion } = useRegionContext()
 
-  const [center, setCenter] = useState(initialCenter.current);
+  const [center, setCenter] = useState(initialCenter.current)
 
   useEffect(() => {
     return () => {
       // Clear region when unmounted
-      setRegion(null);
-    };
-  }, []);
+      setRegion(null)
+    }
+  }, [])
 
   const handleShape = useCallback((shape) => {
-    if (!shape) return;
-    setRegion(shape);
-    setCenter(shape.properties.center);
-  }, []);
+    if (!shape) return
+    setRegion(shape)
+    setCenter(shape.properties.center)
+  }, [])
 
   // TODO: consider extending support for degrees and radians
-  if (!["kilometers", "miles"].includes(units)) {
-    throw new Error("Units must be one of miles, kilometers");
+  if (!['kilometers', 'miles'].includes(units)) {
+    throw new Error('Units must be one of miles, kilometers')
   }
 
-  if (mode == "circle") {
+  if (mode == 'circle') {
     return (
       <CirclePicker
         key={`${mode}-picker`}
@@ -107,8 +107,8 @@ function RegionPicker({
         maxRadius={maxRadius}
         minRadius={minRadius}
       />
-    );
-  } else if (mode == "rectangle") {
+    )
+  } else if (mode == 'rectangle') {
     return (
       <RectanglePicker
         key={`${mode}-picker`}
@@ -125,12 +125,12 @@ function RegionPicker({
         maxRadius={maxRadius}
         minRadius={minRadius}
       />
-    );
+    )
   } else {
     throw new ValueError(
       "RegionPicker `mode` must be one of ['circle', 'rectangle']"
-    );
+    )
   }
 }
 
-export default RegionPicker;
+export default RegionPicker
