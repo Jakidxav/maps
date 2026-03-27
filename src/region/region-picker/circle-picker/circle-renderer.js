@@ -1,5 +1,10 @@
 import { select } from 'd3-selection'
-import { FLOATING_HANDLE, SHOW_RADIUS_GUIDELINE, POLES, UNITS_DICT } from '../constants'
+import {
+  FLOATING_HANDLE,
+  SHOW_RADIUS_GUIDELINE,
+  POLES,
+  UNITS_DICT,
+} from '../constants'
 import { getPathMaker, project } from '../utils'
 import {
   area,
