@@ -1,5 +1,5 @@
 import { select } from 'd3-selection'
-import { FLOATING_HANDLE, SHOW_RADIUS_GUIDELINE } from '../constants'
+import { FLOATING_HANDLE, SHOW_RADIUS_GUIDELINE, POLES, UNITS_DICT } from '../constants'
 import { getPathMaker, project } from '../utils'
 import {
   area,
@@ -13,12 +13,6 @@ import {
   point,
 } from '@turf/turf'
 import CursorManager from '../cursor-manager'
-
-const POLES = [point([0, -90]), point([0, 90])]
-const abbreviations = {
-  kilometers: 'km',
-  miles: 'mi',
-}
 
 export default function CircleRenderer({
   id,
@@ -311,7 +305,7 @@ export default function CircleRenderer({
     const translateY = 4
 
     svgRadiusText
-      .text(radius.toFixed(0) + abbreviations[units])
+      .text(radius.toFixed(0) + UNITS_DICT[units])
       .attr(
         'transform',
         `rotate(${-1 * guidelineAngle + 90}) ` + `translate(0, ${translateY})`

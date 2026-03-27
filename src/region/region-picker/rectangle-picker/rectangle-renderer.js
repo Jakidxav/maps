@@ -1,4 +1,5 @@
 import { select } from 'd3-selection'
+import { SHOW_RADIUS_GUIDELINE, POLES, UNITS_DICT } from '../constants'
 import { getPathMaker, project } from '../utils'
 import {
   area,
@@ -14,15 +15,6 @@ import {
   point,
 } from '@turf/turf'
 import CursorManager from '../cursor-manager'
-
-export const HANDLE_RADIUS = 8
-export const SHOW_RADIUS_GUIDELINE = true
-
-const POLES = [point([0, -90]), point([0, 90])]
-const abbreviations = {
-  kilometers: 'km',
-  miles: 'mi',
-}
 
 export default function RectangleRenderer({
   id,
@@ -221,7 +213,6 @@ export default function RectangleRenderer({
       [_bbox[0], _bbox[1]], // lower‑left  (west, south)
     ]
 
-    // console.log('Corner coordinate pairs:', corners);
     r.properties.center = c?.properties?.center
     r.properties.corners = corners
     r.properties.zoom = map.getZoom()
@@ -335,7 +326,7 @@ export default function RectangleRenderer({
     const translateY = 4
 
     svgRadiusText
-      .text(radius.toFixed(0) + abbreviations[units])
+      .text(radius.toFixed(0) + UNITS_DICT[units])
       .attr(
         'transform',
         `rotate(${-1 * guidelineAngle + 90}) ` + `translate(0, ${translateY})`

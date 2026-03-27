@@ -1,8 +1,7 @@
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useMap } from '../../../map-provider'
 import RectangleRenderer from './rectangle-renderer'
-
-import { HANDLE_RADIUS } from './rectangle-renderer'
+import { HANDLE_RADIUS } from '../constants'
 
 const RectanglePicker = ({
   id,
@@ -74,7 +73,7 @@ const RectanglePicker = ({
         height='100%'
         clipPath={`url(#rect-clip-${id})`}
         fill={backgroundColor}
-        fillOpacity={0.5}
+        fillOpacity={0.8}
       />
 
       <circle

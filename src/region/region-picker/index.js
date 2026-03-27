@@ -90,7 +90,7 @@ function RegionPicker({
     throw new Error('Units must be one of miles, kilometers')
   }
 
-  if (mode == 'circle') {
+  if (mode === 'circle') {
     return (
       <CirclePicker
         key={`${mode}-picker`}
@@ -108,7 +108,7 @@ function RegionPicker({
         minRadius={minRadius}
       />
     )
-  } else if (mode == 'rectangle') {
+  } else if (mode === 'rectangle') {
     return (
       <RectanglePicker
         key={`${mode}-picker`}
@@ -127,7 +127,7 @@ function RegionPicker({
       />
     )
   } else {
-    throw new ValueError(
+    throw new Error(
       "RegionPicker `mode` must be one of ['circle', 'rectangle']"
     )
   }

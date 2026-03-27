@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useMap } from '../../../map-provider'
 import CircleRenderer from './circle-renderer'
+import { HANDLE_RADIUS } from '../constants'
 
 const CirclePicker = ({
   id,
@@ -73,7 +74,7 @@ const CirclePicker = ({
         fill={backgroundColor}
         fillOpacity={0.8}
       />
-      <circle id={`handle-${id}`} r={8} fill={color} cursor='ew-resize' />
+      <circle id={`handle-${id}`} r={HANDLE_RADIUS} fill={color} cursor='ew-resize' />
       <line
         id={`radius-guideline-${id}`}
         stroke={color}

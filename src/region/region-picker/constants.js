@@ -1,3 +1,4 @@
+import { point } from '@turf/turf'
 /*
 Set to true to deduplicate points when filtering. This addresses mapbox's
 caveat about duplication in their docs on queryRenderedFeatures and
@@ -13,13 +14,21 @@ duplicate points, but queryRenderedFeatures does not.
 */
 export const DEDUPE_ON_FILTER = true
 
-//// CIRCLE FILTER ////
-
+//// REGION PICKER FILTER ////
 export const FLOATING_HANDLE = true
+export const HANDLE_RADIUS = 8
 export const SHOW_RADIUS_GUIDELINE = true
+
 /*
 Set to true to update the sidebar stats while dragging the circle.
 Morphocode does that well, but it's really laggy here because
 we need to refilter all of the points every time the mouse moves.
 */
 export const UPDATE_STATS_ON_DRAG = false
+
+export const POLES = [point([0, -90]), point([0, 90])]
+
+export const UNITS_DICT = {
+  kilometers: 'km',
+  miles: 'mi',
+}
